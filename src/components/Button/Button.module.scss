@@ -1,0 +1,25 @@
+.root {
+  height: min-content;
+
+  &:global.MuiButton-outlined {
+    color: var(--mainColor);
+    border-color: var(--mainColor);
+    &:hover {
+      border-color: var(--mainColor);
+      background-color: var(--mainColor01);
+    }
+  }
+  &:global.MuiButton-contained {
+    background-color: var(--mainColor);
+    &:hover {
+      background-color: var(--mainColor);
+    }
+  }
+
+  &:global.MuiButton-text {
+    color: var(--mainColor);
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

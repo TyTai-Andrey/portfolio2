@@ -1,0 +1,15 @@
+.root {
+  & form {
+    position: absolute;
+    top: 40px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    display: flex;
+    flex-direction: column;
+  }
+  .inputForm {
+    margin-bottom: auto;
+  }
+}

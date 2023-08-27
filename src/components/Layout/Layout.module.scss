@@ -1,0 +1,62 @@
+.root {
+  min-height: 100dvh;
+  min-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    width: 100%;
+    padding: 10px;
+    border-right: 1px solid var(--mainColor);
+    background-color: var(--mainColor01);
+
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+    .logo {
+      padding: 20px;
+      text-transform: uppercase;
+    }
+    .loguot {
+      height: min-content;
+      text-transform: uppercase;
+    }
+
+    .loguot {
+      margin-left: auto;
+    }
+
+    .nav {
+      padding: 20px;
+      min-height: 40%;
+
+      .list {
+        list-style: none;
+        display: flex;
+
+        .link {
+          text-decoration: none;
+          text-transform: none;
+
+          &:hover {
+            color: var(--mainColor);
+          }
+
+          &.linkActive {
+            color: var(--mainColor);
+          }
+        }
+
+        li:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+  .main {
+    width: 100%;
+    padding: 20px;
+  }
+}
