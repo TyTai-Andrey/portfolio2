@@ -3,4 +3,15 @@
 
   display: flex;
   justify-content: space-between;
+
+  .mt {
+    margin-top: 20px;
+  }
+
+  .list {
+    list-style: none;
+    li {
+      line-height: 20px;
+    }
+  }
 }

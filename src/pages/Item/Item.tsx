@@ -13,7 +13,15 @@ const Item: FC<ItemProps> = (props) => {
 
     return items.find((i) => String(i.id) === props.match.params?.id);
   }, []);
-  return <div className={styles.root}>{item ? item.text : 'Не найдено'}</div>;
+  return (
+    <div className={styles.root}>
+      {item ? (
+        <pre className={styles.pre}>{JSON.stringify(item, null, 4)}</pre>
+      ) : (
+        'Не найдено'
+      )}
+    </div>
+  );
 };
 
 export default Item;

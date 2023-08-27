@@ -63,7 +63,7 @@ const Items: FC<ItemsProps> = () => {
       <List className={styles.list}>
         {Array.isArray(items)
           ? items.map((i) => (
-              <ListItem key={i.id}>
+              <ListItem key={i.id} className={styles.listItem}>
                 <Link to={i.path} draggable={false} className={styles.link}>
                   {i.text}
                 </Link>

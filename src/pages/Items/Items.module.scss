@@ -5,6 +5,46 @@
   }
 
   .list {
+    margin-top: 20px;
+
+    max-height: calc(100dvh - 180px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding: 10px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: grey;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: grey;
+    }
+
+    .listItem {
+      display: flex;
+      justify-content: space-between;
+
+      border: 1px solid rgb(196, 196, 196);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 6px 4px 14px rgba(196, 196, 196, 0.5);
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+
     li {
       padding-left: 0;
 
