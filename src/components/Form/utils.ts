@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from 'effector';
+import { createEffect, createEvent, createStore } from 'effector';
 import { asyncValidator } from '@utils/asyncValidator';
 import { showNotification } from '@utils/notifications';
 
@@ -9,6 +9,8 @@ import {
   OptionalObjectSchema,
   TypeOfShape,
 } from 'yup/lib/object';
+import { InputFormProps } from '@components/Input/InputForm/InputForm';
+import { ButtonFormProps } from '@components/Button/ButtonForm/ButtonForm';
 
 type UseFormProps<ShapeForm extends ObjectShape> = {
   schema: OptionalObjectSchema<
@@ -46,8 +48,6 @@ export function useForm<R extends ObjectShape>({
     try {
       await validate(form.fields);
       onSubmit(form.fields as Record<keyof R, string>);
-
-      setErrors({});
     } catch (err: any) {
       setErrors(err);
       if (err) {
@@ -99,4 +99,22 @@ export function useForm<R extends ObjectShape>({
   $form.reset(clear);
 
   return { form: $form, setField, submitted, sendFormFx, clear };
+}
+
+export type AllFormProps = { formProps: InputFormProps & ButtonFormProps };
+export type FormPropsType = AllFormProps['formProps'];
+
+export function getProps<T>(
+  props: FormPropsType,
+  fields: Array<Partial<keyof FormPropsType>>,
+): T {
+  let result: any = {};
+
+  for (let index = 0; index < fields.length; index++) {
+    const element = fields[index];
+
+    result[element] = props[element];
+  }
+
+  return result;
 }

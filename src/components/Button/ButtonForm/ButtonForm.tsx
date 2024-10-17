@@ -14,7 +14,7 @@ export type ButtonFormProps = {
       [key: string]: string;
     };
   }>;
-  clear: Event<any>;
+  clear: Event<void>;
 };
 
 type Props = {} & ButtonProps & ButtonFormProps;

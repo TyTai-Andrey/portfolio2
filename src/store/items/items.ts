@@ -23,6 +23,7 @@ export const setItems = createEvent<Items>();
 export const addItems = createEvent<Item | Items>();
 export const removeItem = createEvent<Item>();
 export const setSearch = createEvent<string | undefined>();
+export const resetStote = createEvent<string | undefined>();
 
 $items.on(setItems, (s, items) => {
   localStorage.setItem('items', JSON.stringify(items));
@@ -46,4 +47,9 @@ $items.on(removeItem, (s, item) => {
 
 $items.on(setSearch, (s, search) => {
   return { ...s, search: search || '' };
+});
+
+$items.on(resetStote, () => {
+  localStorage.removeItem('items');
+  return { search: '', items: initItems };
 });

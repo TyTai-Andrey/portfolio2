@@ -1,9 +1,11 @@
-import React, { CSSProperties, FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import styles from '../Box3D/Box3D.module.scss';
 import classNames from 'classnames';
 import { Key } from '@components/Key';
 
 export type Box3DOnButtonsProps = {};
+
+let timer: NodeJS.Timeout;
 
 export const Box3DOnButtons: FC<Box3DOnButtonsProps> = () => {
   const [points, setPoints] = useState({
@@ -22,14 +24,19 @@ export const Box3DOnButtons: FC<Box3DOnButtonsProps> = () => {
   }, [points]);
 
   useEffect(() => {
-    if (points.isDrag)
-      setTimeout(() => {
+    if (points.isDrag) {
+      timer = setTimeout(() => {
         setPoints((prev) => ({ ...prev, isDrag: false }));
       }, 500);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [points.isDrag]);
 
   useEffect(() => {
-    window.addEventListener('keydown', ({ code }) => {
+    const keydownHandler = ({ code }: KeyboardEvent) => {
       setPoints((prev) => {
         if (prev.isDrag) return prev;
 
@@ -197,7 +204,13 @@ export const Box3DOnButtons: FC<Box3DOnButtonsProps> = () => {
 
         return { ...prev, x: _x, y: _y, z: _z, isDrag: true };
       });
-    });
+    };
+
+    window.addEventListener('keydown', keydownHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keydownHandler);
+    };
   }, []);
 
   return (

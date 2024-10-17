@@ -16,10 +16,12 @@ export type InputFormProps = {
     };
   }>;
   setField: Event<{ key: string; value: string | undefined }>;
-  name: string;
 };
 
-export type Props = {} & InputProps & InputFormProps;
+export type Props = {
+  name: string;
+} & InputProps &
+  InputFormProps;
 
 export const InputForm: FC<Props> = ({
   $form,
@@ -46,7 +48,7 @@ export const InputForm: FC<Props> = ({
 
   return (
     <div
-      className={classNames(styles.root, className, {
+      className={classNames(styles.root, className, '123', {
         [styles.error]: isError,
       })}
     >

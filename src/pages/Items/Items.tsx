@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import styles from './Items.module.scss';
 import { Link } from 'react-router-dom';
 import { List, ListItem } from '@mui/material';
@@ -7,7 +7,13 @@ import Input from '@components/Input';
 import { useModal } from '@utils/useModal';
 import { CreateItemModal } from './components/CreateItemModal';
 import { useStore, useStoreMap } from 'effector-react';
-import { $items, Item, removeItem, setSearch } from '@store/items/items';
+import {
+  $items,
+  Item,
+  removeItem,
+  resetStote,
+  setSearch,
+} from '@store/items/items';
 import classNames from 'classnames';
 
 export type ItemsProps = {};
@@ -37,9 +43,13 @@ const Items: FC<ItemsProps> = () => {
 
   const { openModal } = useModal();
 
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     openModal(CreateItemModal);
-  };
+  }, []);
+
+  const onResetStore = useCallback(() => {
+    resetStote();
+  }, []);
 
   const onClickDeleteHandler = (item: Item) => {
     removeItem(item);
@@ -48,9 +58,14 @@ const Items: FC<ItemsProps> = () => {
   return (
     <div className={styles.root}>
       <div className={styles.settings}>
-        <Button variant='contained' size='small' onClick={onCreate}>
-          Create
-        </Button>
+        <div className={styles.buttons}>
+          <Button variant='contained' size='small' onClick={onCreate}>
+            Create
+          </Button>
+          <Button variant='contained' size='small' onClick={onResetStore}>
+            ResetStore
+          </Button>
+        </div>
 
         <Input
           size='small'
@@ -60,6 +75,9 @@ const Items: FC<ItemsProps> = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+      {Array.isArray(items) && (
+        <div className={styles.title}>На нас можно нажать!!!</div>
+      )}
       <List className={styles.list}>
         {Array.isArray(items)
           ? items.map((i) => (

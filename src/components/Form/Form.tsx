@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, memo } from 'react';
-import { sample } from 'effector';
+import { Store, sample, Event } from 'effector';
 import { useForm } from './utils';
 import { addExtraPropsChildren } from '@utils/addExtraPropsChildren';
 import { v4 as uuid } from 'uuid';
@@ -10,6 +10,8 @@ import {
   OptionalObjectSchema,
   TypeOfShape,
 } from 'yup/lib/object';
+import { InputFormProps } from '@components/Input/InputForm/InputForm';
+import { ButtonFormProps } from '@components/Button/ButtonForm/ButtonForm';
 
 interface FormProps<T extends ObjectShape> {
   children: React.ReactNode;
@@ -54,9 +56,11 @@ function Form<T extends ObjectShape>({
   return (
     <form className={className} onSubmit={onSubmit}>
       {addExtraPropsChildren(children, {
-        $form: form,
-        setField,
-        clear,
+        formProps: {
+          $form: form,
+          setField,
+          clear,
+        },
       })}
     </form>
   );

@@ -24,7 +24,7 @@ const Login = () => {
   }, [auth, location]);
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-id='Input'>
       <Form
         className={styles.form}
         onSubmit={(fields: Record<string, string>) => {

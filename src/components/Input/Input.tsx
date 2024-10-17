@@ -3,23 +3,28 @@ import styles from './Input.module.scss';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import classNames from 'classnames';
 import { InputForm } from './InputForm';
+import { AllFormProps, getProps } from '@components/Form/utils';
 import { InputFormProps } from './InputForm/InputForm';
 
 export type InputProps = Omit<TextFieldProps, 'error'> & {
   className?: string;
   error?: string;
   withoutError?: boolean;
-} & Partial<InputFormProps>;
+} & Partial<AllFormProps>;
 
 const Input: FC<Omit<InputProps, 'variant'>> = ({
   className,
   error,
+  formProps,
   ...props
 }) => {
-  if (props.$form && props.name && props.setField) {
-    const { $form, name, setField } = props;
+  if (formProps?.$form && props?.name && formProps?.setField!) {
+    const propsInputForm = getProps<InputFormProps>(formProps, [
+      '$form',
+      'setField',
+    ]);
 
-    return <InputForm {...props} {...{ $form, name, setField, className }} />;
+    return <InputForm {...props} {...propsInputForm} name={props.name} />;
   }
 
   return (
