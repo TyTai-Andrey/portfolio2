@@ -54,11 +54,11 @@ export function useForm<R extends ObjectShape>({
         for (const key in err) {
           const element = err[key];
 
-          // showNotification({
-          //   title: element,
-          //   message: element,
-          //   type: 'warning',
-          // });
+          showNotification({
+            title: element,
+            message: element,
+            type: 'warning',
+          });
         }
       }
     }
